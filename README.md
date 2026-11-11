@@ -254,8 +254,18 @@ All tests are executed with `--detectOpenHandles --runInBand` to surface async i
 ---
 
 ## 📸 Screenshots
-*Dashboard overview – request volume & latency*
-> (Add screenshots of the running UI here. If not available, note that screenshots are omitted.)
+
+### 1. Live Telemetry Overview
+Real-time sliding-window analytics, token bucket quota enforcement, throughput charts, and p95 tail latency monitoring.
+![Live Telemetry Overview](docs/images/overview_dashboard.png)
+
+### 2. API Gateway Playground
+Interactive HTTP testing console supporting single requests, client profile switching, and concurrent burst testing.
+![API Gateway Playground](docs/images/api_playground.png)
+
+### 3. Traffic Explorer
+Searchable and bounded in-memory request log with microsecond latency tracing and status code inspection.
+![Traffic Explorer](docs/images/traffic_explorer.png)
 
 ---
 
@@ -266,6 +276,8 @@ All tests are executed with `--detectOpenHandles --runInBand` to surface async i
 - **Distributed tracing** integration (OpenTelemetry).
 - **Horizontal scaling** – multiple gateway instances behind a load balancer.
 - **Advanced analytics** – drill‑down per endpoint, error rates, client‑specific graphs.
+
 ---
 
-*End of README*
+## 👩‍💻 Developer
+**Developer:** Sandhya Kushwaha
