@@ -1,0 +1,65 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: pulsegate-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  upstream:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.upstream
+    container_name: pulsegate-upstream
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    environment:
+      - PORT=4001
+    depends_on:
+      - redis
+
+  gateway:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: pulsegate-gateway
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - CLIENT_ORIGIN=http://localhost:5173
+      - REDIS_URL=redis://redis:6379
+      - UPSTREAM_BASE_URL=http://upstream:4001
+      - DEMO_API_KEY=pg_demo_key_9f83a21b4e
+      - ADMIN_API_KEY=pg_admin_key_77c19e5d2a
+      - REQUEST_LOG_LIMIT=500
+    depends_on:
+      redis:
+        condition: service_healthy
+      upstream:
+        condition: service_started
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: pulsegate-client
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:4000
+    depends_on:
+      - gateway
+
+volumes:
+  redis_data:

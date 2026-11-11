@@ -1,0 +1,19 @@
+# Node.js and build artefacts to ignore
+node_modules/
+client/node_modules/
+server/node_modules/
+client/dist/
+server/dist/
+# Local env files
+device.env
+.env
+.env.*
+# Logs and caches
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+# Docker artefacts
+Dockerfile
+Dockerfile.upstream
+docker-compose.yml
+

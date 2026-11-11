@@ -1,0 +1,40 @@
+{
+  "name": "pulsegate-server",
+  "version": "1.0.0",
+  "description": "PulseGate API Gateway & Analytics Backend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "start:upstream": "node src/upstream/upstreamServer.js",
+    "dev:upstream": "nodemon src/upstream/upstreamServer.js",
+    "dev:all": "node scripts/startAll.js",
+    "test": "jest --detectOpenHandles --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "api-gateway",
+    "rate-limiting",
+    "redis",
+    "token-bucket",
+    "analytics"
+  ],
+  "author": "PulseGate Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.4.2",
+    "redis": "^4.7.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "ioredis-mock": "^8.13.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}
